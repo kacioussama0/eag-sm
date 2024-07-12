@@ -12,6 +12,7 @@ class SettingController extends Controller
      */
     public function index($setting)
     {
+
         $settings = [
             ["name" => "Années Scolaires","link" => "/settings/school-years","type" => "année scolaire"],
             ["name" => "Comment il a connu l'école","link" => "/settings/school-social","type" => "année scolaire"],

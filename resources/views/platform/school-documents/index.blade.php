@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Ajout de Niveau';
+    $title = 'Ajout de Document administratif';
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -50,50 +50,53 @@
                     <div class="col-xl-4">
                         <div class="mb-5">
                             <x-alert />
-                            <h2 class="small-title">Ajout</h2>
+                            <h2 class="small-title">Ajout de Documents</h2>
                             <div class="card">
                                 <div class="card-body">
-                                    <form method="POST" action="{{route('settings.store')}}">
+                                    <form method="POST" action="{{route('school-documents.store')}}" enctype="multipart/form-data">
                                         @csrf
-                                        <x-c-input type="text" label="Nom de la branche :" name="name" id="name" value="{{old('name')}}"/>
-                                        <x-c-input type="text" label="Nom du niveau en arabe :" name="name_ar" id="name_ar" value="{{old('name_ar')}}"/>
+                                        <x-c-input type="text" label="Titre :" name="name" id="name" value="{{old('name')}}"/>
+                                        <x-c-input type="text" label="Description :" name="description" id="description" value="{{old('description')}}"/>
+                                        <x-c-input type="file" label="Fichier joint :" name="file" id="file" value="{{old('file')}}"/>
                                         <button type="submit"  class="btn btn-outline-primary btn-icon btn-icon-start">
                                             <i data-acorn-icon="save"></i>
                                             <span>Valider</span>
                                         </button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-8">
                     <div class="mb-5">
-                        <h2 class="small-title">Liste des Niveaux</h2>
+                        <h2 class="small-title">Liste des documents</h2>
                         <div class="card">
                             <div class="card-body">
                                 <table class="table table-dark table-striped">
                                     <thead>
                                         <tr>
                                             <th>Nom</th>
-                                            <th>Nom en arabe</th>
+                                            <th>Description</th>
+                                            <th>Fichier</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach($setting as $data)
+                                        @foreach($documents as $document)
                                             <tr>
-                                                <td>{{$data->name}}</td>
-                                                <td>{{$data->name_ar}}</td>
+                                                <td>{{$document->name}}</td>
+                                                <td>{{$document->description}}</td>
+                                                <td><a href="{{asset('storage/' . $document->file)}}" target="_blank"><i data-acorn-icon="attachment" data-acorn-size="18"></i></a></td>
+
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a href="{{route('settings.edit',$data->id)}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                                        <button type="submit" form="delete-setting-{{$data->id}}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                                        <a href="{{route('school-documents.edit',$document->id)}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                                        <button type="submit" form="delete-document-{{$document->id}}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                                                     </div>
 
-                                                    <form action="{{route('settings.destroy',$level->id)}}" id="delete-setting-{{$data->id}}"  method="POST" onsubmit="return confirm('es-tu sûr ?')">
+                                                    <form action="{{route('school-documents.destroy',$document->id)}}" id="delete-document-{{$document->id}}"  method="POST" onsubmit="return confirm('es-tu sûr ?')">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

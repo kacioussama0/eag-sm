@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Editer de Classe';
+    $title = 'Editer Document';
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -16,49 +16,7 @@
 @endsection
 
 @section('js_page')
-
-    <script>
-
-        const branches = document.querySelector('#branch_id');
-
-
-
-        branches.onchange = async function (event) {
-
-            const ID = event.target.value;
-            const levels = document.querySelector('#level_id');
-
-            levels.innerHTML = `<option value="" disabled="" selected="">Select</option>`;
-
-            const response = await  fetch(`{{url('') }}\\platform\\branches\\levels\\${ID}`);
-
-            const data = await response.json();
-
-            for(let i = 0 ; i < data.length ; i++) {
-                levels.innerHTML += `<option value="${data[i].id}">${data[i].name}</option>`;
-            }
-
-
-        }
-
-
-        window.onload = async function () {
-
-            const ID = {{$classe->branch_id}};
-
-            const response = await  fetch(`{{url('') }}\\platform\\branches\\levels\\${ID}`);
-            const data = await response.json();
-
-            const levels = document.querySelector('#level_id');
-            levels.innerHTML = `<option value="" disabled="">Select</option>`;
-
-            for(let i = 0 ; i < data.length ; i++) {
-                levels.innerHTML += `<option value="${data[i].id}" ${(data[i].id == {{$classe->level_id}}) ? "selected" : ""}>${data[i].name}</option>`;
-            }
-
-        }
-
-    </script>
+    <script src="/js/pages/settings.general.js"></script>
 @endsection
 
 @section('content')
@@ -102,14 +60,13 @@
                     <h2 class="small-title">Editer de Branche</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{route('classes.update',$classe->id)}}" >
+                            <form method="POST" action="{{route('school-documents.update',$document)}}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <x-c-select label="Branche :" name="branch_id" :options="$branches" value="{{$classe->branch_id}}"/>
-                                <x-c-select label="Niveau :" name="level_id" :options="[]" value="{{$classe->level_id}}"/>
-                                <x-c-input type="text" label="Code :" name="code_class" id="classe_id"  value="{{$classe->code_class}}"/>
-                                <x-c-input type="text" label="Nom de la classe :" name="name" id="name" value="{{$classe->name}}"/>
-                                <x-c-input type="text" label="Nom de la classe en arabe :" name="name_ar" id="name_ar" value="{{$classe->name_ar}}"/>
+                                <x-c-input type="text" label="Titre :" name="name" id="name" value="{{$document->name}}"/>
+                                <x-c-input type="text" label="Description :" name="description" id="description" value="{{$document->description}}"/>
+                                <x-c-input type="file" label="Fichier joint :" name="file" id="file" value="{{old('file')}}"/>
+                                <a href="{{asset('storage/' . $document->file)}}" target="_blank" class="d-block mb-3"><i data-acorn-icon="attachment" data-acorn-size="18"></i></a>
                                 <button type="submit"  class="btn btn-outline-primary btn-icon btn-icon-start">
                                     <i data-acorn-icon="save"></i>
                                     <span>Valider</span>

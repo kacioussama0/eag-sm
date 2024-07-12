@@ -12,7 +12,7 @@ $navLists = [
                 ["name" => "Niveaux de classes","link" => "/platform/levels"],
                 ["name" => "Salles","link" => "/platform/rooms"],
                 ["name" => "Classes","link" => "/platform/classes"],
-//                ["name" => "Documents","link" => "/platform/school"],
+                ["name" => "Documents administratifs","link" => "/platform/school-documents"],
             ]
 
         ],

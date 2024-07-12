@@ -25,6 +25,7 @@ Route::prefix('platform')->group(function () {
     Route::resource('levels', \App\Http\Controllers\LevelController::class)->name('','levels');
     Route::resource('rooms', \App\Http\Controllers\RoomController::class)->name('','rooms');
     Route::resource('classes', \App\Http\Controllers\ClassesController::class)->name('','classes');
+    Route::resource('school-documents', \App\Http\Controllers\SchoolDocumentController::class)->name('','school-documents');
     Route::get('branches/levels/{branchId}/',[\App\Http\Controllers\ClassesController::class,'branchLevels']);
 });
 
