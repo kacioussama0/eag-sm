@@ -10,12 +10,48 @@ $navLists = [
                 ["name" => "Cycles","link" => "/platform/cycles"],
                 ["name" => "Branches","link" => "/platform/branches"],
                 ["name" => "Niveaux de classes","link" => "/platform/levels"],
-//                ["name" => "Salles","link" => "/platform/school"],
-//                ["name" => "Classes","link" => "/platform/school"],
+                ["name" => "Salles","link" => "/platform/rooms"],
+                ["name" => "Classes","link" => "/platform/classes"],
 //                ["name" => "Documents","link" => "/platform/school"],
             ]
 
-        ]
+        ],
+
+            [
+            "name" => "Paramètres",
+            "icon" => "gear",
+            "link" => "p-settings",
+            "childrens" => [
+                ["name" => "Années Scolaires","link" => "/settings/school-years"],
+                ["name" => "Comment il a connu l'école","link" => "/settings/school-social"],
+                ["name" => "Depenses","link" => "/settings/expenses"],
+                ["name" => "Devise","link" => "/settings/currency"],
+                ["name" => "Diplômes","link" => "/settings/diplomas"],
+                ["name" => "Documents pédagogiques","link" => "/settings/educational-documents"],
+                ["name" => "Etat Civil","link" => "/settings/marital-status"],
+                ["name" => "Fonctions","link" => "/settings/functions"],
+                ["name" => "Langue","link" => "/settings/languages"],
+                ["name" => "Lien de Parenté","link" => "/settings/relationship"],
+                ["name" => "Nationnalités","link" => "/settings/nationalities"],
+                ["name" => "Natures des matières","link" => "/settings/nature-of-materials"],
+                ["name" => "Niveaux de Branches","link" => "/settings/branch-levels"],
+                ["name" => "Niveaux de formations","link" => "/settings/training-levels"],
+                ["name" => "Niveaux scolaires","link" => "/settings/school-levels"],
+                ["name" => "Pays","link" => "/settings/countries"],
+                ["name" => "Professions","link" => "/settings/professions"],
+                ["name" => "Recompenses","link" => "/settings/awards"],
+                ["name" => "Religions","link" => "/settings/religions"],
+                ["name" => "Sanctions","link" => "/settings/sanctions"],
+                ["name" => "Thème Ouvrage","link" => "/settings/book-theme"],
+                ["name" => "Types de branches","link" => "/settings/branch-types"],
+                ["name" => "Types des documents","link" => "/settings/document-types"],
+                ["name" => "Types de professeurs","link" => "/settings/types-of-teachers"],
+                ["name" => "Types écoles","link" => "/settings/types-of-schools"],
+                ["name" => "Types de salle","link" => "/settings/room-types"],
+                ["name" => "Villes","link" => "/settings/cities"],
+
+            ]
+            ]
 ];
 
 @endphp
@@ -210,12 +246,12 @@ $navLists = [
         <ul id="menu" class="menu">
             @foreach($navLists as $item)
                 <li>
-                    <a href="{{url(strtolower($item['link']))}}">
+                    <a href="#{{$item['link']}}">
                         <i data-acorn-icon="{{$item['icon']}}" class="icon" data-acorn-size="18"></i>
                         <span class="label">{{$item['name']}}</span>
                     </a>
                     @if(count($item['childrens']))
-                        <ul id="{{strtolower($item['link'])}}">
+                        <ul id="{{$item['link']}}">
                            @foreach($item['childrens'] as $children)
                                 <li>
                                     <a href="{{$children['link']}}">
