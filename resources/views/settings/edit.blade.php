@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Editer Niveau';
+    $title = 'Editer ' . $foundSetting['name'];
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -57,16 +57,14 @@
             <div class="col-xl-4">
                 <div class="mb-5">
                     <x-alert />
-                    <h2 class="small-title">Editer de Niveau</h2>
+                    <h2 class="small-title">Editer de {{$foundSetting['name']}}</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{route('levels.update',$level)}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{url('settings/' . $foundSetting['setting'] . "/edit/" . $data->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <x-c-select label="Branche: " name="branch_id" :options="$branches" value="{{$level->branch_id}}"/>
-                                <x-c-input type="text" label="Nom de la branche :" name="name" id="name" value="{{$level->name}}"/>
-                                <x-c-input type="text" label="Nom du niveau en arabe :" name="name_ar" id="name_ar" value="{{$level->name_ar}}"/>
-                                <x-c-input type="file" label="Fourniture Scolaire :" name="school_supplies" id="school_supplies" value="{{old('school_supplies')}}"/>
+                                <x-c-input type="text" label="Nom:" name="name" id="name" value="{{$data->name}}"/>
+                                <x-c-input type="text" label="Nom en arabe :" name="name_ar" id="name_ar" value="{{$data->name_ar}}"/>
                                 <button type="submit"  class="btn btn-outline-primary btn-icon btn-icon-start">
                                     <i data-acorn-icon="save"></i>
                                     <span>Valider</span>

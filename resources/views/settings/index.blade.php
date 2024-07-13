@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Ajout de Niveau';
+    $title = 'Ajout de ' . $foundSetting['name'];
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -53,10 +53,10 @@
                             <h2 class="small-title">Ajout</h2>
                             <div class="card">
                                 <div class="card-body">
-                                    <form method="POST" action="{{route('settings.store')}}">
+                                    <form method="POST" action="{{url('settings/' . $foundSetting['setting']) }}">
                                         @csrf
-                                        <x-c-input type="text" label="Nom de la branche :" name="name" id="name" value="{{old('name')}}"/>
-                                        <x-c-input type="text" label="Nom du niveau en arabe :" name="name_ar" id="name_ar" value="{{old('name_ar')}}"/>
+                                        <x-c-input type="text" label="Nom:" name="name" id="name" value="{{old('name')}}"/>
+                                        <x-c-input type="text" label="Nom en arabe :" name="name_ar" id="name_ar" value="{{old('name_ar')}}"/>
                                         <button type="submit"  class="btn btn-outline-primary btn-icon btn-icon-start">
                                             <i data-acorn-icon="save"></i>
                                             <span>Valider</span>
@@ -70,7 +70,7 @@
 
                     <div class="col-xl-8">
                     <div class="mb-5">
-                        <h2 class="small-title">Liste des Niveaux</h2>
+                        <h2 class="small-title">Liste des {{$foundSetting['name']}}</h2>
                         <div class="card">
                             <div class="card-body">
                                 <table class="table table-dark table-striped">
@@ -83,17 +83,17 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($setting as $data)
+                                        @foreach($data as $setting)
                                             <tr>
-                                                <td>{{$data->name}}</td>
-                                                <td>{{$data->name_ar}}</td>
+                                                <td>{{$setting->name}}</td>
+                                                <td>{{$setting->name_ar}}</td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a href="{{route('settings.edit',$data->id)}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                                        <button type="submit" form="delete-setting-{{$data->id}}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                                        <a href="{{url('settings/' . $foundSetting['setting'] . "/edit/" . $setting->id) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                                        <button type="submit" form="delete-setting-{{$setting->id}}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                                                     </div>
 
-                                                    <form action="{{route('settings.destroy',$level->id)}}" id="delete-setting-{{$data->id}}"  method="POST" onsubmit="return confirm('es-tu sûr ?')">
+                                                    <form action="{{url('settings/' . $foundSetting['setting'] . "/" . $setting->id) }}" id="delete-setting-{{$setting->id}}"  method="POST" onsubmit="return confirm('es-tu sûr ?')">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

@@ -30,5 +30,9 @@ Route::prefix('platform')->group(function () {
 });
 
 Route::prefix('settings')->group(function () {
-    Route::resource('/{setting}', \App\Http\Controllers\SettingController::class)->name('','settings');
+    Route::get('/{setting}', [\App\Http\Controllers\SettingController::class,'index']);
+    Route::post('/{setting}', [\App\Http\Controllers\SettingController::class,'store']);
+    Route::get('/{setting}/edit/{id}', [\App\Http\Controllers\SettingController::class,'edit']);
+    Route::put('/{setting}/edit/{id}', [\App\Http\Controllers\SettingController::class,'update']);
+    Route::delete('/{setting}/{id}', [\App\Http\Controllers\SettingController::class,'destroy']);
 });
