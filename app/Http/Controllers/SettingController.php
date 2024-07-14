@@ -12,7 +12,6 @@ class SettingController extends Controller
      */
 
 
-
     public function findSetting($setting)
     {
         $settings = [

@@ -4,7 +4,7 @@ $navLists = [
         [
             "name" => "Platforme",
             "icon" => "home-garage",
-            "link" => "platforme",
+            "link" => "#platforme",
             "childrens" => [
                 ["name" => "Ecole","link" => "/platform/school/1"],
                 ["name" => "Cycles","link" => "/platform/cycles"],
@@ -20,7 +20,7 @@ $navLists = [
             [
             "name" => "Paramètres",
             "icon" => "gear",
-            "link" => "p-settings",
+            "link" => "#p-settings",
             "childrens" => [
                 ["name" => "Années Scolaires","link" => "/settings/school-years"],
                 ["name" => "Comment il a connu l'école","link" => "/settings/school-social"],
@@ -51,7 +51,22 @@ $navLists = [
                 ["name" => "Villes","link" => "/settings/cities"],
 
             ]
-            ]
+            ],
+             [
+            "name" => "Services",
+            "icon" => "home-garage",
+            "link" => "/services",
+            "childrens" => []
+
+        ],
+         [
+            "name" => "Sous Services",
+            "icon" => "home-garage",
+            "link" => "/sub-services",
+            "childrens" => []
+
+        ],
+
 ];
 
 @endphp
@@ -246,7 +261,7 @@ $navLists = [
         <ul id="menu" class="menu">
             @foreach($navLists as $item)
                 <li>
-                    <a href="#{{$item['link']}}">
+                    <a href="{{$item['link']}}">
                         <i data-acorn-icon="{{$item['icon']}}" class="icon" data-acorn-size="18"></i>
                         <span class="label">{{$item['name']}}</span>
                     </a>

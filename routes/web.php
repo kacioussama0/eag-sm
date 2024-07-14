@@ -36,3 +36,6 @@ Route::prefix('settings')->group(function () {
     Route::put('/{setting}/edit/{id}', [\App\Http\Controllers\SettingController::class,'update']);
     Route::delete('/{setting}/{id}', [\App\Http\Controllers\SettingController::class,'destroy']);
 });
+
+Route::resource('services', \App\Http\Controllers\ServiceController::class)->name('','services');
+Route::resource('sub-services', \App\Http\Controllers\SubServiceController::class)->name('','sub-services');

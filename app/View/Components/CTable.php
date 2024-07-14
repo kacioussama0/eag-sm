@@ -8,13 +8,25 @@ use Illuminate\View\Component;
 
 class CTable extends Component
 {
-    public $thead;
-    public $tbody;
+    public $head;
+    public $body;
+    public $title = "";
+    public $hasAction = false;
+    public $edit = "";
+    public $destroy = "";
+    public $keys = [];
 
-    public function __construct($thead,$tbody = [])
+
+    public function __construct($title,$keys,$head,$body = [],$hasAction = false,$edit = "",$destroy = "")
     {
-        $this->thead = $thead;
-        $this->tbody = $tbody;
+        $this->title = $title;
+        $this->head = $head;
+        $this->body = $body;
+        $this->hasAction = $hasAction;
+        $this->edit = $edit;
+        $this->destroy = $destroy;
+        $this->keys = $keys;
+
     }
 
     /**

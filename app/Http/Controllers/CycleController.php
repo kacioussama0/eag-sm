@@ -12,7 +12,7 @@ class CycleController extends Controller
      */
     public function index()
     {
-        $cycles = Cycle::all();
+        $cycles = Cycle::all(['id','name','name_ar','duration'])->toArray();
         return view('platform.cycles.index',compact('cycles'));
     }
 

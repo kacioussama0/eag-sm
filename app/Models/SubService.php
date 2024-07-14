@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Setting extends Model
+class SubService extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['name','name_ar','type'];
 
-    public function rooms()
-    {
-        return $this->hasMany(Room::class);
+    protected $fillable = ['name','name_ar','service_id'];
+
+    public function service() {
+        return $this->belongsTo(Service::class);
     }
 
 }

@@ -13,7 +13,7 @@ class Room extends Model
 
     protected $guarded = ['id'];
 
-    public function type()
+    public function type_room()
     {
         return $this->belongsTo(Setting::class);
     }

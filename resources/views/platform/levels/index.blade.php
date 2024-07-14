@@ -92,7 +92,7 @@
                                                 <td>{{$level->name}}</td>
                                                 <td>{{$level->name_ar}}</td>
                                                 <td>{{$level->branch->name}}</td>
-                                                <td><a href="{{asset('storage/' . $level->school_supplies)}}" class="link-primary" download>Télécharger</a></td>
+                                                <td><a href="{{asset('storage/' . $level->school_supplies)}}" class="link-primary" download><i data-acorn-icon="attachment" data-acorn-size="18"></i></a></td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <a href="{{route('levels.edit',$level->id)}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
