@@ -39,3 +39,7 @@ Route::prefix('settings')->group(function () {
 
 Route::resource('services', \App\Http\Controllers\ServiceController::class)->name('','services');
 Route::resource('sub-services', \App\Http\Controllers\SubServiceController::class)->name('','sub-services');
+
+Route::prefix('human-resources')->group(function () {
+   Route::resource('staff',\App\Http\Controllers\StaffController::class)->name('','staff');
+});

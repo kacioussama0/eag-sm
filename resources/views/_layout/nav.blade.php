@@ -67,6 +67,16 @@ $navLists = [
 
         ],
 
+        [
+            "name" => "Ressources humaines",
+            "icon" => "user",
+            "link" => "#human-resources",
+            "childrens" => [
+                ["name" => "Personnel","link" => "/human-resources/staff"],
+            ]
+
+        ],
+
 ];
 
 @endphp
@@ -266,7 +276,7 @@ $navLists = [
                         <span class="label">{{$item['name']}}</span>
                     </a>
                     @if(count($item['childrens']))
-                        <ul id="{{$item['link']}}">
+                        <ul id="{{trim($item['link'],"#")}}">
                            @foreach($item['childrens'] as $children)
                                 <li>
                                     <a href="{{$children['link']}}">

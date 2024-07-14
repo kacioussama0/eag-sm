@@ -6,9 +6,7 @@
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
 
 @section('css')
-    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
-    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 @endsection
 
 @section('js_vendor')
@@ -16,7 +14,7 @@
 @endsection
 
 @section('js_page')
-    <script src="/js/pages/settings.general.js"></script>
+    <script src="/js/pages/instructor.list.js"></script>
 @endsection
 
 @section('content')
