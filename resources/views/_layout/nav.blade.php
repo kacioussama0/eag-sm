@@ -73,6 +73,8 @@ $navLists = [
             "link" => "#human-resources",
             "childrens" => [
                 ["name" => "Personnel","link" => "/human-resources/staff"],
+                ["name" => "Absence","link" => "/human-resources/absences"],
+                ["name" => "Retard","link" => "/human-resources/delays"],
             ]
 
         ],

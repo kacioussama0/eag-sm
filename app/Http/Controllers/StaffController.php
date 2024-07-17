@@ -248,7 +248,7 @@ class StaffController extends Controller
         }
 
         if($staff->update($validatedData)){
-            return redirect()->route('staff.index')->with('success', 'Personnel editer avec succès');
+            return redirect()->route('staff.show',$staff)->with('success', 'Personnel editer avec succès');
         }
 
         abort(500);
@@ -259,6 +259,8 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
-        //
+        if($staff->delete()) {
+            return redirect()->route('staff.index')->with('success', 'Personnel supprimer avec succès');
+        }
     }
 }

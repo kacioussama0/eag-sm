@@ -42,4 +42,6 @@ Route::resource('sub-services', \App\Http\Controllers\SubServiceController::clas
 
 Route::prefix('human-resources')->group(function () {
    Route::resource('staff',\App\Http\Controllers\StaffController::class)->name('','staff');
+   Route::resource('absences',\App\Http\Controllers\StaffAbsenceController::class)->name('','absences');
+   Route::resource('delays',\App\Http\Controllers\StaffDelayController::class)->name('','delays');
 });

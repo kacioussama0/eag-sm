@@ -83,6 +83,7 @@
                 <h2 class="small-title">Info</h2>
                 <div class="card">
                     <div class="card-body mb-n5">
+                        <x-alert/>
                         <div class="d-flex align-items-center flex-column">
                             <div class="mb-5 d-flex align-items-center flex-column">
                                 <div class="sw-13 position-relative mb-3 mx-auto">
@@ -104,8 +105,11 @@
                         <div class="d-flex justify-content-center">
                             <div class="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100 mb-5">
                                 <a href="{{route('staff.edit',$staff)}}" class="btn btn-primary w-100 me-2">Edit</a>
-                                <button type="button" class="btn btn-outline-primary w-100 me-2">Supprimer</button>
-
+                                <button type="submit" form="delete-staff-{{$staff->id}}" class="btn btn-outline-primary w-100 me-2">Supprimer</button>
+                                <form method="POST" id="delete-staff-{{$staff->id}}" onsubmit="return confirm('vous etes sur!')">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </div>
                         </div>
 
@@ -128,7 +132,7 @@
                                             <i data-acorn-icon="calendar" class="text-primary"></i>
                                         </div>
                                     </div>
-                                    <div class="col text-alternate">{{$staff->date_of_birth ?? "Vide"}} à {{$staff->place_of_birth ?? "Vide"}}</div>
+                                    <div class="col text-alternate">{{$staff->date_of_birth ?? "Vide"}} à {{$staff->place_of_birth->name ?? "Vide"}}</div>
                                 </div>
 
                                 <div class="row g-0 mb-2">

@@ -43,6 +43,8 @@
 
         <!-- Title and Top Buttons End -->
 
+        <x-alert/>
+
         <a href="{{route('staff.create')}}" class="btn btn-outline-primary my-3"><i data-acorn-icon="plus" data-acorn-size="16" class="text-primary"></i> Ajout de personnel</a>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4 g-3 mb-5">
@@ -89,14 +91,27 @@
                                     </div>
                                 </div>
                                 <div class="col ps-3">
-                                    <div class="sh-4 d-flex align-items-center lh-1-25">{{$staff->date_of_birth ?? "Vide"}} à {{$staff->place_of_birth ?? "Vide"}}</div>
+                                    <div class="sh-4 d-flex align-items-center lh-1-25">{{$staff->date_of_birth ?? "Vide"}} à {{$staff->place_of_birth->name ?? "Vide"}}</div>
                                 </div>
                             </div>
                             <div class="d-flex flex-row justify-content-between w-100">
-                                <a href="{{route('staff.show',$staff)}}" class="btn btn-outline-primary w-100 me-1 btn-sm">Detail</a>
-                                <button class="btn btn-icon btn-icon-only btn-outline-primary btn-sm" type="button">
+                                <a href="{{route('staff.show',$staff)}}" class="btn btn-outline-primary w-100 me-1 btn-sm"><i class="bi bi-person me-2"></i> Detail</a>
+
+                                <button class="btn btn-icon btn-icon-only btn-outline-primary btn-sm" type="button"   data-bs-offset="0,3" data-bs-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">
                                     <i data-acorn-icon="more-horizontal"></i>
                                 </button>
+
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="{{route('staff.edit',$staff)}}" class="dropdown-item"><i class="bi bi-pencil me-2"></i> Edit</a>
+                                    <button type="submit" form="delete-staff-{{$staff->id}}" class="dropdown-item"><i class="bi bi-trash-fill me-2"></i> Supprimer</button>
+                                    <form method="POST" action="{{route('staff.destroy',$staff->id)}}" id="delete-staff-{{$staff->id}}" onsubmit="return confirm('vous etes sur!')">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
