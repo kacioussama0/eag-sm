@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('nic_number',100)->nullable();
             $table->date('nic_date')->nullable();
             $table->unsignedInteger('children')->nullable();
+            $table->date('recruitment_date')->nullable();
             $table->date('departure_date')->nullable();
             $table->string('reason_departure')->nullable();
             $table->string('bank_name')->nullable(); # Banque

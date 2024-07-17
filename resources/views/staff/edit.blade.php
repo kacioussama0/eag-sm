@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Ecole';
+    $title = 'Editer du personnel';
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -50,73 +50,102 @@
 
 
         <!-- Title and Top Buttons End -->
-        <form method="POST" id="send-form" action="{{route('school.update',$school)}}" enctype="multipart/form-data">
+        <form method="POST" id="send-form" action="{{route('staff.update',$staff)}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row mb-n5">
-                    <div class="col-xl-4">
-                        <div class="mb-5">
-                            <h2 class="small-title">Modification école</h2>
-                            <div class="card">
-                                <div class="card-body">
+                <div class="col-xl-6">
+                    <div class="mb-5">
+                        <h2 class="small-title">Editer du personnel</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <x-c-input type="text" label="Matricule :" name="registration_number" id="registration_number" value="{{$staff->registration_number}}"/>
+                                <x-c-input type="text" label="Id Pointeuse :" name="pointing_id" id="pointing_id" value="{{$staff->pointing_id}}"/>
+                                <x-c-input type="text" label="Numéro CNSS :	" name="nssf_number" id="nssf_number" value="{{$staff->nssf_number}}"/>
+                                <x-c-input type="text" label="Nom :	" name="first_name" id="first_name" value="{{$staff->first_name}}"/>
+                                <x-c-input type="text" label="Prenom :" name="last_name" id="last_name" value="{{$staff->last_name}}"/>
 
-
-                                        <x-c-input type="text" label="Nom" name="name" id="name" value="{{$school['name']}}"/>
-                                        <x-c-input type="text" label="Nom abrégé" name="name_abbr" id="name_abbr" value="{{$school['name_abbr']}}"/>
-                                        <x-c-input type="text" label="Gsm Responsable" name="manager_phone" id="manager_phone" value="{{$school['manager_phone']}}" />
-                                        <x-c-input type="email" label="Email" name="email" id="email" value="{{$school['email']}}" />
-                                        <x-c-input type="url" label="Site web" name="site_url" id="site_url" value="{{$school['site_url']}}" />
-                                        <x-c-input type="text" label="Addresse" name="address" id="address" value="{{$school['address']}}" />
-                                        <x-c-input type="text" label="Code Postal" name="postal_code" id="postal_code" value="{{$school['postal_code']}}"/>
-                                        <x-c-input type="text" label="Pays" name="country" id="country" value="{{$school['country']}}"/>
-                                        <x-c-input type="text" label="Délégation" name="delegation" id="delegation" value="{{$school['delegation']}}"/>
-                                        <x-c-input type="text" label="Academie" name="academy" id="academy" value="{{$school['academy']}}"/>
-                                        <x-c-input type="text" label="Telephone" name="phone" id="phone" value="{{$school['phone']}}"/>
-                                        <x-c-input type="text" label="Teléphone 2" name="phone_alt" id="phone_alt" value="{{$school['phone_alt']}}"/>
-                                        <x-c-input type="text" label="Fax" name="fax" id="fax" value="{{$school['fax']}}"/>
-                                        <x-c-input type="text" label="Numéro CNSS" name="nssf_number" id="nssf_number" value="{{$school['nssf_number']}}"/>
-                                        <x-c-input type="text" label="Numéro RC" name="cr_number" id="cr_number" value="{{$school['cr_number']}}"/>
-                                        <x-c-input type="text" label="Compte Bancaire" name="bank_account" id="bank_account" value="{{$school['bank_account']}}"/>
-                                        <x-c-input type="text" label="Banque" name="bank_name" id="bank_name" value="{{$school['bank_name']}}"/>
-                                        <x-c-input type="text" label="Agence" name="bank_agency" id="bank_agency" value="{{$school['bank_agency']}}"/>
-                                        <x-c-input type="text" label="Longitude" name="longitude" id="longitude" value="{{$school['longitude']}}"/>
-                                        <x-c-input type="text" label="Latitude" name="latitude" id="latitude" value="{{$school['latitude']}}"/>
-                                        <x-c-input type="text" label="Informations Légales" name="legal_informations" id="legal_informations" value="{{$school['legal_informations']}}"/>
-                                        <x-c-input type="text" label="Numéro autorisation" name="authorization_number" id="authorization_number" value="{{$school['authorization_number']}}"/>
-                                        <x-c-input type="date" label="Date autorisation" name="authorization_date" id="authorization_date" value="{{$school['authorization_date']}}"/>
-
-
+                                <div class="form-check form-check-inline mb-3">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="M" @checked($staff->gender == 'M')>
+                                    <label class="form-check-label" for="male">Masculin</label>
                                 </div>
+                                <div class="form-check form-check-inline mb-3">
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="F" @checked($staff->gender == 'F')>
+                                    <label class="form-check-label" for="female">Feminin</label>
+                                </div>
+                                <x-c-input type="text" label="Adresse :	" name="address" id="address" value="{{$staff->address}}"/>
+                                <x-c-input type="text" label="Code Postal :" name="postal_code" id="postal_code" value="{{$staff->postal_code}}"/>
+                                <x-c-select label="Ville  :" name="city_residence_id" :options="$cities" value="{{$staff->city_residence_id}}"/>
+                                <x-c-select label="Pays  :" name="country_id" :options="$countries" value="{{$staff->country_id}}"/>
+                                <x-c-input type="text" label="Email :" name="email" id="email" value="{{$staff->email}}"/>
+                                <x-c-input type="text" label="GSM :" name="phone" id="phone" value="{{$staff->phone}}"/>
+                                <x-c-input type="text" label="Fix :" name="fix" id="fix" value="{{$staff->fix}}"/>
+                                <x-c-select label="Nationnalité  :" name="nationality_id" :options="$nationalities" value="{{$staff->nationality_id}}"/>
+                                <x-c-input type="text" label="CIN  :" name="nic_number" id="nic_number" value="{{$staff->nic_number}}"/>
+                                <x-c-input type="date" label="Date CIN :" name="nic_date" id="nic_date" value="{{$staff->nic_date}}"/>
+                                <x-c-input type="date" label="Date de naissance :" name="date_of_birth" id="date_of_birth" value="{{$staff->date_of_birth}}"/>
+                                <x-c-select label="Ville de naissance :" name="place_of_birth_id" :options="$cities" value="{{$staff->place_of_birth_id}}"/>
+                                <x-c-input type="date" label="Date de recrutement :" name="recruitment_date" id="recruitment_date" value="{{$staff->recruitment_date}}"/>
+                                <x-c-input type="date" label="Date de départ :" name="departure_date" id="departure_date" value="{{$staff->departure_date}}"/>
+                                <x-c-input type="text" label="Motif de départ :" name="reason_departure" id="reason_departure" value="{{$staff->reason_departure}}"/>
+                                <x-c-select label="Fonction : " name="function_id" :options="$functions" value="{{$staff->function_id}}"/>
+                                <x-c-select label="Service : " name="service_id" :options="$services" value="{{$staff->service_id}}"/>
+                                <x-c-select label="Sous Service : " name="sub_service_id" :options="$subServices" value="{{$staff->sub_service_id}}"/>
+                                <x-c-select label="Etat Civil  :" name="marital_status_id" :options="$maritalStatus" value="{{$staff->marital_status_id}}"/>
+                                <x-c-input type="text" label="Nombre des Enfants  :" name="children" id="children" value="{{$staff->children}}"/>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-8">
-                        <div class="mb-5">
-                            <h2 class="small-title">Informations en langue Arabe</h2>
-                            <div class="card">
-                                <div class="card-body">
-                                    <x-c-input type="text" label="Nom" name="name_ar" id="name_ar" value="{{$school['name_ar']}}"/>
-                                    <x-c-input type="text" label="Adresse de l'école" name="address_ar" id="address_ar" value="{{$school['address_ar']}}"/>
-                                    <x-c-input type="text" label="Délégation" name="delegation_ar" id="delegation_ar" value="{{$school['delegation_ar']}}" />
-                                    <x-c-input type="text" label="Responsable" name="manager_ar" id="manager_ar" value="{{$school['manager_ar']}}" />
-                                    <x-c-input type="text" label="Informations Légales" name="legal_informations_ar" id="legal_informations_ar" value="{{$school['legal_informations_ar']}}" />
-                                </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="mb-5">
+                        <h2 class="small-title">Informations en langue Arabe</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <x-c-input type="text" label="Nom en arabe : " name="first_name_ar" id="first_name_ar" value="{{$staff->first_name_ar}}"/>
+                                <x-c-input type="text" label="Prénom en arabe :" name="last_name_ar" id="last_name_ar" value="{{$staff->last_name_ar}}"/>
+                                <x-c-input type="text" label="Adresse en arabe:	" name="address_ar" id="address_ar" value="{{$staff->address_ar}}"/>
                             </div>
                         </div>
-
-                        <div class="mb-5">
-                            <h2 class="small-title">Envoi des photos :</h2>
-                            <div class="card">
-                                <div class="card-body">
-                                    <x-c-input type="file" label="Logo" name="logo" id="logo"  />
-                                    <x-c-input type="file" label="Entete" name="header" id="header"  />
-                                    <x-c-input type="file" label="Pied de page" name="footer" id="footer" />
-                                    <x-c-input type="file" label="Réglement intérieur" name="school_rules" id="school_rules" />
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+
+
+                    <div class="mb-5">
+                        <h2 class="small-title">Informations en langue Arabe</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <x-c-input type="text" label="Salaire: " name="salary" id="salary" value="{{$staff->salary}}"/>
+                                <x-c-input type="text" label="Taux Horaire:	" name="rate_hourly" id="rate_hourly" value="{{$staff->rate_hourly}}"/>
+                                <x-c-select label="Devise:" name="currency_id" :options="$currencies" value="{{$staff->currency_id}}"/>
+                                <x-c-input type="text" label="Nom de la banque :	" name="bank_name" id="bank_name" value="{{$staff->bank_name}}"/>
+                                <x-c-input type="text" label="Agence:" name="bank_account" id="bank_account" value="{{$staff->bank_account}}"/>
+                                <x-c-input type="text" label="Numéro de compte bancaire :" name="bank_agency" id="bank_agency" value="{{$staff->bank_agency}}"/>
+                                <x-c-input type="text" label="PayPal :" name="paypal" id="paypal" value="{{$staff->paypal}}"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-5">
+                        <h2 class="small-title">Envoi des photos :</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="sw-13 position-relative mb-3 mx-auto">
+                                    @if(!empty($staff->photo))
+                                        <img src="{{asset('storage/' . $staff->photo )}}" class="img-fluid rounded-xl" alt="thumb" />
+                                    @elseif($staff->gender == 'M')
+                                        <img src="{{asset('img/profile/videM.jpg')}}" class="img-fluid rounded-xl" alt="thumb" />
+                                    @elseif($staff->gender == 'F')
+                                        <img src="{{asset('img/profile/videF.jpg')}}" class="img-fluid rounded-xl" alt="thumb" />
+                                    @endif
+                                </div>
+                                <x-c-input type="file" label="Photo : " name="photo" id="photo" value="{{old('photo')}}"  />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </form>
     </div>

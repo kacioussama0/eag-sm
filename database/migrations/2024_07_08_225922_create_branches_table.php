@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code_branch',20);
             $table->string('name');
-            $table->string('name_ar');
+            $table->string('name_ar')->nullable();
             $table->integer('order')->default(0)->nullable();
             $table->unsignedBigInteger('cycle_id');
             $table->foreign('cycle_id')->references('id')->on('cycles')->onDelete('cascade')->onUpdate('cascade');
