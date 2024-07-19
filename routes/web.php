@@ -44,4 +44,7 @@ Route::prefix('human-resources')->group(function () {
    Route::resource('staff',\App\Http\Controllers\StaffController::class)->name('','staff');
    Route::resource('absences',\App\Http\Controllers\StaffAbsenceController::class)->name('','absences');
    Route::resource('delays',\App\Http\Controllers\StaffDelayController::class)->name('','delays');
+   Route::resource('vacations',\App\Http\Controllers\VacationController::class)->name('','vacations');
+   Route::resource('staff-authorizations',\App\Http\Controllers\StaffAuthorizationController::class)->name('','staff-authorizations');
+   Route::resource('staff-sanctions',\App\Http\Controllers\StaffPunishmentController::class)->name('','staff-sanctions');
 });

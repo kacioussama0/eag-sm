@@ -17,7 +17,38 @@ $navLists = [
 
         ],
 
-            [
+
+             [
+            "name" => "Services",
+            "icon" => "menu",
+            "link" => "/services",
+            "childrens" => []
+
+        ],
+         [
+            "name" => "Sous Services",
+            "icon" => "menu-shrink",
+            "link" => "/sub-services",
+            "childrens" => []
+
+        ],
+
+        [
+            "name" => "Ressources humaines",
+            "icon" => "user",
+            "link" => "#human-resources",
+            "childrens" => [
+                ["name" => "Personnel","link" => "/human-resources/staff"],
+                ["name" => "Absence","link" => "/human-resources/absences"],
+                ["name" => "Retard","link" => "/human-resources/delays"],
+                ["name" => "Congés","link" => "/human-resources/vacations"],
+                ["name" => "Autorisations","link" => "/human-resources/staff-authorizations"],
+                ["name" => "Sanctions","link" => "/human-resources/staff-sanctions"],
+            ]
+
+        ],
+
+          [
             "name" => "Paramètres",
             "icon" => "gear",
             "link" => "#p-settings",
@@ -52,32 +83,6 @@ $navLists = [
 
             ]
             ],
-             [
-            "name" => "Services",
-            "icon" => "home-garage",
-            "link" => "/services",
-            "childrens" => []
-
-        ],
-         [
-            "name" => "Sous Services",
-            "icon" => "home-garage",
-            "link" => "/sub-services",
-            "childrens" => []
-
-        ],
-
-        [
-            "name" => "Ressources humaines",
-            "icon" => "user",
-            "link" => "#human-resources",
-            "childrens" => [
-                ["name" => "Personnel","link" => "/human-resources/staff"],
-                ["name" => "Absence","link" => "/human-resources/absences"],
-                ["name" => "Retard","link" => "/human-resources/delays"],
-            ]
-
-        ],
 
 ];
 
