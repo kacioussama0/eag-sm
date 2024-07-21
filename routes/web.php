@@ -48,3 +48,7 @@ Route::prefix('human-resources')->group(function () {
    Route::resource('staff-authorizations',\App\Http\Controllers\StaffAuthorizationController::class)->name('','staff-authorizations');
    Route::resource('staff-sanctions',\App\Http\Controllers\StaffPunishmentController::class)->name('','staff-sanctions');
 });
+
+Route::prefix('repartition-yearly')->group(function () {
+    Route::resource('subjects',\App\Http\Controllers\SubjectController::class)->name('','subjects');
+});
