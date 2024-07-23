@@ -53,7 +53,8 @@ $navLists = [
             "icon" => "calendar",
             "link" => "#repartition-yearly",
             "childrens" => [
-                ["name" => "Personnel","link" => "/repartition-yearly/subjects"],
+                ["name" => "Matière","link" => "/repartition-yearly/subjects"],
+                ["name" => "Composantes","link" => "/repartition-yearly/components"],
 
             ]
 

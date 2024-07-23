@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Editer Matière';
+    $title = 'Editer composant';
     $description= 'Acorn elearning platform course list.';
 @endphp
 @extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description,])
@@ -60,14 +60,13 @@
                     <h2 class="small-title">{{$title}}</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{route('subjects.update',$subject)}}">
+                            <form method="POST" action="{{route('components.update',$component)}}">
                                 @csrf
                                 @method('PUT')
-                                <x-c-select label="Unité : " name="nature_subject_id" :options="$natures" value="{{$subject->nature_subject_id}}" />
-                                <x-c-input type="text" label="Nom de la matière :" name="name" id="name" value="{{$subject->name}}"/>
-                                <x-c-input type="text" label="Nom de la matière en arabe :" name="name_ar" id="name_ar" value="{{$subject->name_ar}}"/>
-                                <x-c-select label="Type de salle :" name="type_room_id" :options="$typeRoom" value="{{$subject->type_room_id}}" />
-                                <x-c-select label="Langue :" name="langue_id" :options="$languages" value="{{$subject->langue_id}}" />
+                                <x-c-select label="Matière : " name="subject_id" :options="$subjects" value="{{$component->subject_id}}" />
+                                <x-c-input type="text" label="Composante :" name="name" id="name" value="{{$component->name}}"/>
+                                <x-c-input type="text" label="Composante en arabe :" name="name_ar" id="name_ar" value="{{$component->name_ar}}"/>
+                                <x-c-input type="color" label="Couleur :" name="color" id="color" value="{{$component->color}}"/>
 
                                 <button type="submit"  class="btn btn-outline-primary btn-icon btn-icon-start">
                                     <i data-acorn-icon="save"></i>
@@ -75,7 +74,6 @@
                                 </button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
