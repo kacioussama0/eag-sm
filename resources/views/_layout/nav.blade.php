@@ -61,6 +61,27 @@ $navLists = [
         ],
 
 
+        [
+            "name" => "Demandes d'admission",
+            "icon" => "user",
+            "link" => "#prospects",
+            "childrens" => [
+                ["name" => "Demandes d'admission","link" => "/schooling/students"],
+            ]
+
+        ],
+
+            [
+            "name" => "Scolarité",
+            "icon" => "home-garage",
+            "link" => "#schooling",
+            "childrens" => [
+                ["name" => "Elèves","link" => "/schooling/students"],
+            ]
+
+        ],
+
+
           [
             "name" => "Paramètres",
             "icon" => "gear",

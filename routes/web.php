@@ -53,3 +53,7 @@ Route::prefix('repartition-yearly')->group(function () {
     Route::resource('subjects',\App\Http\Controllers\SubjectController::class)->name('','subjects');
     Route::resource('components',\App\Http\Controllers\ComponentController::class)->name('','components');
 });
+
+Route::prefix('schooling')->group(function () {
+    Route::resource('students',\App\Http\Controllers\StudentController::class)->name('','students');
+});
