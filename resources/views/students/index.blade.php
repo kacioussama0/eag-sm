@@ -61,7 +61,7 @@
                                     <img src="{{asset('img/profile/videF.jpg')}}" class="img-fluid rounded-xl" alt="thumb" />
                                 @endif
                             </div>
-                            <a href="Instructor.Detail.html" class="body-link">{{$student['first_name'] . ' ' . $student['last_name']}}</a>
+                            <a href="Instructor.Detail.html" class="body-link">{{$student->full_name}}</a>
 {{--                            <div class="text-muted text-medium mb-2">{{$staff->service->name ?? "Vide"}}</div>--}}
 {{--                            <div class="text-muted sh-5">Fonction : {{$staff->fun->name ?? "Vide"}} </div>--}}
                             <div class="row g-0 align-items-center mb-1">

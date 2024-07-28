@@ -81,12 +81,14 @@ class StudentController extends Controller
             'country_id' => 'nullable|integer',
             'postal_code' => 'nullable',
             'place_of_birth_id' => 'nullable',
+            'country_of_birth_id' => 'nullable',
+            'mother_language_id' => 'nullable',
+            'home_language_id' => 'nullable',
             'email' => 'nullable',
             'phone' => 'nullable',
             'nic_number' => 'nullable',
             'cne_number' => 'nullable',
             'date_of_birth' => 'nullable',
-            'country_of_birth_id' => 'nullable',
             'religion_id' => 'nullable',
             'currency_id' => 'nullable',
             'assurance_name' => 'nullable',
@@ -104,11 +106,11 @@ class StudentController extends Controller
         $created = Student::create($validatedData);
 
         if($request->hasFile('photo')){
-            $validatedData['photo'] = $request->file('photo')->store('staff/photos','public');
+            $validatedData['photo'] = $request->file('photo')->store('students/photos','public');
         }
 
         if($created){
-           dd("create student");
+            return redirect()->route('students.index')->with('success', 'Etudiant créé avec succès');
         }
 
         abort(500);
@@ -128,7 +130,45 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        $nationalitiesArr = Setting::where('type','nationnalite')->get()->toArray();
+        $countriesArr = Setting::where('type','pays')->get()->toArray();
+        $currenciesArr = Setting::where('type','devise')->get()->toArray();
+        $religionArr = Setting::where('type','religion')->get()->toArray();
+        $citiesArr = Setting::where('type','ville')->get()->toArray();
+        $languagesArr = Setting::where('type','langue')->get()->toArray();
+
+        $nationalities = [];
+        $countries = [];
+        $currencies = [];
+        $cities = [];
+        $languages = [];
+        $religions = [];
+
+        foreach ($nationalitiesArr as $nationality) {
+            $nationalities[$nationality['name']] = $nationality['id'];
+        }
+
+        foreach ($countriesArr as $country) {
+            $countries[$country['name']] = $country['id'];
+        }
+
+        foreach ($currenciesArr as $currency) {
+            $currencies[$currency['name']] = $currency['id'];
+        }
+
+        foreach ($citiesArr as $city) {
+            $cities[$city['name']] = $city['id'];
+        }
+
+        foreach ($religionArr as $religion) {
+            $religions[$religion['name']] = $religion['id'];
+        }
+
+        foreach ($languagesArr as $language) {
+            $languages[$language['name']] = $language['id'];
+        }
+
+        return view('students.edit',compact('student','nationalities','countries','currencies','cities','religions','languages'));
     }
 
     /**
@@ -136,7 +176,49 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $validatedData = $request->validate([
+            'number' => 'nullable',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'nationality_id' => 'nullable|integer',
+            'address' => 'nullable',
+            'country_id' => 'nullable|integer',
+            'postal_code' => 'nullable',
+            'place_of_birth_id' => 'nullable',
+            'country_of_birth_id' => 'nullable',
+            'mother_language_id' => 'nullable',
+            'home_language_id' => 'nullable',
+            'email' => 'nullable',
+            'phone' => 'nullable',
+            'nic_number' => 'nullable',
+            'cne_number' => 'nullable',
+            'date_of_birth' => 'nullable',
+            'religion_id' => 'nullable',
+            'currency_id' => 'nullable',
+            'assurance_name' => 'nullable',
+            'assurance_number' => 'nullable',
+            'old_school' => 'nullable',
+            'old_academy' => 'nullable',
+            'old_delegation' => 'nullable',
+            'old_state' => 'nullable',
+            'remarks' => 'nullable',
+            'first_name_ar' => 'nullable',
+            'last_name_ar' => 'nullable',
+            'address_ar' => 'nullable',
+        ]);
+
+        if($request->hasFile('photo')){
+            $validatedData['photo'] = $request->file('photo')->store('students/photos','public');
+        }
+
+        if($student->update($validatedData)){
+            return redirect()->route('students.index')->with('success', 'Etudiant Editer avec succès');
+
+        }
+
+        abort(500);
+
     }
 
     /**
@@ -144,6 +226,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        if($student->delete()){
+            return redirect()->route('students.index')->with('success', 'Etudiant supprimer avec succès');
+        }
     }
 }

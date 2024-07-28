@@ -64,13 +64,5 @@ class Staff extends Model
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function getDurationAttribute()
-    {
-        $start = new \DateTime($this->start_date);
-        $end = new \DateTime($this->end_date);
-
-        return date_diff($start, $end)->format('%d');
-
-    }
 
 }
